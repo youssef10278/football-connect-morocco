@@ -4,13 +4,13 @@ const nextConfig = {
     domains: ['localhost'],
     unoptimized: true, // Pour éviter les problèmes avec les images statiques
   },
-  output: 'standalone', // Pour optimiser le déploiement Docker
-  experimental: {
-    outputFileTracingRoot: undefined,
-  },
   // Optimisations pour le déploiement
   swcMinify: true,
   compress: true,
+  // Configuration pour Railway
+  env: {
+    CUSTOM_KEY: 'my-value',
+  },
 }
 
 module.exports = nextConfig;
