@@ -321,26 +321,26 @@ export function PremiumPlayerList({
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
+      <Card className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 space-y-3 sm:space-y-0">
           <div>
-            <h3 className="text-xl font-bold text-slate-900 flex items-center space-x-2">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center space-x-2">
               {selectedPosition ? (
                 <>
-                  <TrendingUp className="w-5 h-5 text-morocco-red-500" />
-                  <span>Joueurs - {selectedPosition}</span>
+                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-morocco-red-500" />
+                  <span className="text-sm sm:text-base">Joueurs - {selectedPosition}</span>
                 </>
               ) : (
                 <>
-                  <User className="w-5 h-5 text-slate-500" />
-                  <span>Sélectionnez une position</span>
+                  <User className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500" />
+                  <span className="text-sm sm:text-base">Sélectionnez une position</span>
                 </>
               )}
             </h3>
             {selectedPosition && (
-              <p className="text-sm text-slate-600 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
                 {players.length} talent{players.length > 1 ? 's' : ''} disponible{players.length > 1 ? 's' : ''}
               </p>
             )}

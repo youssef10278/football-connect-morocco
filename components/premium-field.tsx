@@ -71,36 +71,36 @@ const FORMATIONS: Record<string, Formation> = {
   }
 };
 
-function FormationSelector({ 
-  selectedFormation, 
-  onFormationChange 
-}: { 
-  selectedFormation: string; 
+function FormationSelector({
+  selectedFormation,
+  onFormationChange
+}: {
+  selectedFormation: string;
   onFormationChange: (formation: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
       {Object.entries(FORMATIONS).map(([key, formation]) => (
         <button
           key={key}
           onClick={() => onFormationChange(key)}
-          className={`relative px-4 py-3 rounded-2xl border-2 transition-all duration-300 hover:scale-105 ${
+          className={`relative px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 hover:scale-105 flex-1 sm:flex-none ${
             selectedFormation === key
               ? 'border-morocco-red-500 bg-morocco-red-50 shadow-glow'
               : 'border-slate-200 bg-white hover:border-morocco-red-300'
           }`}
         >
-          <div className="flex items-center space-x-2">
-            <span className={`font-bold ${
+          <div className="flex items-center justify-center sm:justify-start space-x-2">
+            <span className={`text-sm sm:text-base font-bold ${
               selectedFormation === key ? 'text-morocco-red-700' : 'text-slate-700'
             }`}>
               {formation.name}
             </span>
             {formation.isPremium && (
-              <Crown className="w-4 h-4 text-morocco-gold-500" />
+              <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-morocco-gold-500" />
             )}
           </div>
-          <p className={`text-xs mt-1 ${
+          <p className={`text-xs mt-1 text-center sm:text-left ${
             selectedFormation === key ? 'text-morocco-red-600' : 'text-slate-500'
           }`}>
             {formation.description}
@@ -150,23 +150,23 @@ function PositionButton({
   return (
     <button
       onClick={onClick}
-      className={`absolute w-14 h-14 rounded-2xl border-2 border-white/50 flex flex-col items-center justify-center text-white font-bold text-xs transition-all duration-300 hover:scale-110 hover:rotate-3 group ${getZoneColor()}`}
+      className={`absolute w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border-2 border-white/50 flex flex-col items-center justify-center text-white font-bold text-xs transition-all duration-300 hover:scale-110 hover:rotate-3 group ${getZoneColor()}`}
       style={{
         left: `${pos.x}%`,
         top: `${pos.y}%`,
         transform: 'translate(-50%, -50%)'
       }}
     >
-      <span className="text-[10px] leading-tight">{position}</span>
+      <span className="text-[8px] sm:text-[10px] leading-tight">{position}</span>
       {isSelected && (
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-morocco-gold-500 rounded-full flex items-center justify-center">
-          <Star className="w-2 h-2 text-white" />
+        <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-4 sm:h-4 bg-morocco-gold-500 rounded-full flex items-center justify-center">
+          <Star className="w-1.5 h-1.5 sm:w-2 sm:h-2 text-white" />
         </div>
       )}
-      
+
       {/* Pulse effect when selected */}
       {isSelected && (
-        <div className="absolute inset-0 rounded-2xl bg-white/20 animate-pulse" />
+        <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-white/20 animate-pulse" />
       )}
     </button>
   );
@@ -183,24 +183,25 @@ export function PremiumField({
   const formation = FORMATIONS[selectedFormation];
 
   return (
-    <Card className="p-6 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+    <Card className="p-4 sm:p-6 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center space-x-2">
-            <Target className="w-6 h-6 text-morocco-red-500" />
-            <span>Terrain Tactique Premium</span>
+          <h2 className="text-lg sm:text-2xl font-bold text-slate-900 flex items-center space-x-2">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-morocco-red-500" />
+            <span className="hidden sm:inline">Terrain Tactique Premium</span>
+            <span className="sm:hidden">Terrain Premium</span>
           </h2>
-          <p className="text-slate-600">Cliquez sur une position pour découvrir les talents</p>
+          <p className="text-sm sm:text-base text-slate-600">Cliquez sur une position pour découvrir les talents</p>
         </div>
-        
-        <div className="flex items-center space-x-3">
-          <Badge variant="premium">
+
+        <div className="flex items-center justify-between sm:justify-end space-x-3">
+          <Badge variant="premium" className="text-xs sm:text-sm">
             <Zap className="w-3 h-3 mr-1" />
             Mode Pro
           </Badge>
           <div className="text-right">
-            <p className="text-sm font-semibold text-slate-700">Formation active</p>
+            <p className="text-xs sm:text-sm font-semibold text-slate-700">Formation active</p>
             <p className="text-xs text-slate-500">{formation.name}</p>
           </div>
         </div>
@@ -214,9 +215,9 @@ export function PremiumField({
 
       {/* Football Field */}
       <div className="relative">
-        <div 
-          className="bg-gradient-to-b from-green-400 via-green-500 to-green-600 rounded-3xl p-8 relative shadow-premium overflow-hidden"
-          style={{ aspectRatio: '2/3', minHeight: '700px' }}
+        <div
+          className="bg-gradient-to-b from-green-400 via-green-500 to-green-600 rounded-2xl sm:rounded-3xl p-4 sm:p-8 relative shadow-premium overflow-hidden"
+          style={{ aspectRatio: '2/3', minHeight: '500px' }}
         >
           {/* Grass texture overlay */}
           <div className="absolute inset-0 opacity-10">
@@ -226,28 +227,28 @@ export function PremiumField({
           </div>
 
           {/* Field markings */}
-          <div className="absolute inset-6 border-4 border-white/80 rounded-2xl shadow-inner">
+          <div className="absolute inset-3 sm:inset-6 border-2 sm:border-4 border-white/80 rounded-xl sm:rounded-2xl shadow-inner">
             {/* Center circle */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-4 border-white/80 rounded-full">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg" />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-32 sm:h-32 border-2 sm:border-4 border-white/80 rounded-full">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full shadow-lg" />
             </div>
-            
+
             {/* Center line */}
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-white/80 shadow-sm" />
-            
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 sm:h-1 bg-white/80 shadow-sm" />
+
             {/* Penalty areas */}
-            <div className="absolute top-0 left-1/4 right-1/4 h-20 border-4 border-white/80 border-t-0 rounded-b-2xl" />
-            <div className="absolute bottom-0 left-1/4 right-1/4 h-20 border-4 border-white/80 border-b-0 rounded-t-2xl" />
-            
+            <div className="absolute top-0 left-1/4 right-1/4 h-12 sm:h-20 border-2 sm:border-4 border-white/80 border-t-0 rounded-b-xl sm:rounded-b-2xl" />
+            <div className="absolute bottom-0 left-1/4 right-1/4 h-12 sm:h-20 border-2 sm:border-4 border-white/80 border-b-0 rounded-t-xl sm:rounded-t-2xl" />
+
             {/* Goal areas */}
-            <div className="absolute top-0 left-2/5 right-2/5 h-12 border-4 border-white/80 border-t-0 rounded-b-xl" />
-            <div className="absolute bottom-0 left-2/5 right-2/5 h-12 border-4 border-white/80 border-b-0 rounded-t-xl" />
+            <div className="absolute top-0 left-2/5 right-2/5 h-6 sm:h-12 border-2 sm:border-4 border-white/80 border-t-0 rounded-b-lg sm:rounded-b-xl" />
+            <div className="absolute bottom-0 left-2/5 right-2/5 h-6 sm:h-12 border-2 sm:border-4 border-white/80 border-b-0 rounded-t-lg sm:rounded-t-xl" />
 
             {/* Corner arcs */}
-            <div className="absolute top-0 left-0 w-8 h-8 border-r-4 border-b-4 border-white/80 rounded-br-full" />
-            <div className="absolute top-0 right-0 w-8 h-8 border-l-4 border-b-4 border-white/80 rounded-bl-full" />
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-r-4 border-t-4 border-white/80 rounded-tr-full" />
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-l-4 border-t-4 border-white/80 rounded-tl-full" />
+            <div className="absolute top-0 left-0 w-4 h-4 sm:w-8 sm:h-8 border-r-2 border-b-2 sm:border-r-4 sm:border-b-4 border-white/80 rounded-br-full" />
+            <div className="absolute top-0 right-0 w-4 h-4 sm:w-8 sm:h-8 border-l-2 border-b-2 sm:border-l-4 sm:border-b-4 border-white/80 rounded-bl-full" />
+            <div className="absolute bottom-0 left-0 w-4 h-4 sm:w-8 sm:h-8 border-r-2 border-t-2 sm:border-r-4 sm:border-t-4 border-white/80 rounded-tr-full" />
+            <div className="absolute bottom-0 right-0 w-4 h-4 sm:w-8 sm:h-8 border-l-2 border-t-2 sm:border-l-4 sm:border-t-4 border-white/80 rounded-tl-full" />
           </div>
 
           {/* Player positions */}
@@ -266,46 +267,46 @@ export function PremiumField({
           )}
 
           {/* Zone labels */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+          <div className="absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full">
             <span className="text-white text-xs font-semibold">ATTAQUE</span>
           </div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full">
             <span className="text-white text-xs font-semibold">MILIEU</span>
           </div>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+          <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-white/20 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full">
             <span className="text-white text-xs font-semibold">DÉFENSE</span>
           </div>
         </div>
 
         {/* Field Info */}
-        <div className="mt-6 text-center">
+        <div className="mt-4 sm:mt-6 text-center">
           {!selectedPosition ? (
-            <div className="space-y-2">
-              <p className="text-slate-600 font-medium">
+            <div className="space-y-2 sm:space-y-3">
+              <p className="text-sm sm:text-base text-slate-600 font-medium">
                 Cliquez sur une position pour découvrir les joueurs disponibles
               </p>
-              <div className="flex items-center justify-center space-x-6 text-sm">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm">
                 <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 bg-blue-500 rounded-full" />
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full" />
                   <span className="text-slate-600">Défense</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 bg-morocco-green-500 rounded-full" />
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-morocco-green-500 rounded-full" />
                   <span className="text-slate-600">Milieu</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 bg-morocco-red-500 rounded-full" />
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-morocco-red-500 rounded-full" />
                   <span className="text-slate-600">Attaque</span>
                 </div>
               </div>
             </div>
           ) : (
             <div className="space-y-2">
-              <p className="text-lg font-bold text-morocco-red-600 flex items-center justify-center space-x-2">
-                <Target className="w-5 h-5" />
-                <span>Position sélectionnée: {selectedPosition}</span>
+              <p className="text-base sm:text-lg font-bold text-morocco-red-600 flex items-center justify-center space-x-2">
+                <Target className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">Position sélectionnée: {selectedPosition}</span>
               </p>
-              <p className="text-slate-600">
+              <p className="text-sm sm:text-base text-slate-600">
                 Découvrez les meilleurs talents pour ce poste
               </p>
             </div>

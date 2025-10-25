@@ -69,36 +69,47 @@ export default function CoachTerrainPage() {
 
       <div className="relative z-10">
         {/* Breadcrumb & Title */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center space-x-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8 space-y-4 lg:space-y-0">
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Link href="/coach">
-                <Button variant="ghost" size="sm" className="hover:bg-slate-100">
+                <Button variant="ghost" size="sm" className="hover:bg-slate-100 w-fit">
                   <ChevronLeft className="w-4 h-4 mr-2" />
                   Dashboard
                 </Button>
               </Link>
-              
+
               <div className="animate-fade-in-up">
                 <div className="flex items-center space-x-3 mb-2">
                   <Sparkles className="w-5 h-5 text-morocco-gold-500" />
-                  <span className="text-sm font-semibold text-morocco-gold-600 bg-morocco-gold-100 px-3 py-1 rounded-full">
+                  <span className="text-xs sm:text-sm font-semibold text-morocco-gold-600 bg-morocco-gold-100 px-2 sm:px-3 py-1 rounded-full">
                     Terrain Premium
                   </span>
                 </div>
-                
-                <h1 className="text-3xl md:text-4xl font-black text-slate-900">
+
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900">
                   Terrain Tactique
-                  <span className="gradient-text block text-2xl md:text-3xl">Interactif</span>
+                  <span className="gradient-text block text-xl sm:text-2xl md:text-3xl">Interactif</span>
                 </h1>
-                
-                <p className="text-slate-600 mt-2">
+
+                <p className="text-sm sm:text-base text-slate-600 mt-2">
                   Explorez les formations et découvrez les talents par position
                 </p>
               </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* Quick Actions - Mobile & Desktop */}
+            <div className="flex lg:hidden items-center justify-between bg-white/80 backdrop-blur-sm rounded-xl p-3 border border-slate-200">
+              <div className="text-left">
+                <p className="text-xs font-semibold text-slate-700">Formation active</p>
+                <p className="text-xs text-slate-500">{selectedFormation}</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-xs text-slate-600">Temps réel</span>
+              </div>
+            </div>
+
             <div className="hidden lg:flex items-center space-x-3">
               <div className="text-right">
                 <p className="text-sm font-semibold text-slate-700">Formation active</p>
@@ -112,10 +123,10 @@ export default function CoachTerrainPage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Football Field - 2/3 width */}
-            <div className="lg:col-span-2 space-y-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+            {/* Football Field - Full width on mobile, 2/3 on desktop */}
+            <div className="xl:col-span-2 space-y-4 sm:space-y-6">
               <div className="animate-fade-in-up">
                 <PremiumField
                   selectedPosition={selectedPosition}
@@ -125,8 +136,8 @@ export default function CoachTerrainPage() {
                 />
               </div>
 
-              {/* Formation Stats */}
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              {/* Formation Stats - Hidden on mobile, shown on tablet+ */}
+              <div className="hidden sm:block animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <FormationStats
                   selectedFormation={selectedFormation}
                   selectedPosition={selectedPosition}
@@ -135,8 +146,8 @@ export default function CoachTerrainPage() {
               </div>
             </div>
 
-            {/* Players List - 1/3 width */}
-            <div className="space-y-6">
+            {/* Players List - Full width on mobile, 1/3 on desktop */}
+            <div className="space-y-4 sm:space-y-6">
               <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                 <PremiumPlayerList
                   selectedPosition={selectedPosition}
@@ -145,22 +156,31 @@ export default function CoachTerrainPage() {
                   onPlayerAction={handlePlayerAction}
                 />
               </div>
+
+              {/* Formation Stats - Mobile only */}
+              <div className="sm:hidden animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                <FormationStats
+                  selectedFormation={selectedFormation}
+                  selectedPosition={selectedPosition}
+                  totalPlayers={players.length}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-8 right-8 z-50 flex flex-col space-y-3">
+      {/* Floating Action Buttons - Responsive */}
+      <div className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-50 flex flex-col space-y-2 sm:space-y-3">
         <Link href="/coach/search">
-          <button className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-premium hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group">
-            <TrendingUp className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
+          <button className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl shadow-premium hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group">
+            <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:rotate-12 transition-transform" />
           </button>
         </Link>
-        
+
         <Link href="/coach/feed">
-          <button className="w-12 h-12 bg-gradient-to-r from-morocco-red-500 to-morocco-red-600 rounded-2xl shadow-premium hover:shadow-glow flex items-center justify-center transition-all duration-300 hover:scale-110 group">
-            <Zap className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
+          <button className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-morocco-red-500 to-morocco-red-600 rounded-xl sm:rounded-2xl shadow-premium hover:shadow-glow flex items-center justify-center transition-all duration-300 hover:scale-110 group">
+            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:rotate-12 transition-transform" />
           </button>
         </Link>
       </div>
