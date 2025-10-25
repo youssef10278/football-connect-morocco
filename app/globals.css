@@ -69,7 +69,7 @@
 
   /* Amélioration de l'alignement des boutons CTA */
   .cta-button {
-    @apply flex items-center justify-center space-x-3 w-full;
+    @apply flex items-center justify-center space-x-3;
   }
   
   .cta-button > * {

@@ -66,15 +66,15 @@ export default function HomePage() {
             
             {/* CTA Buttons Premium */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <Button asChild variant="default" size="xl" className="group">
+              <Button asChild variant="default" size="xl" className="group w-full sm:w-auto max-w-xs">
                 <Link href="/player/onboarding" className="cta-button">
                   <Users className="w-6 h-6 transition-transform group-hover:scale-110" />
                   <span className="font-semibold whitespace-nowrap">Je suis joueur</span>
                   <Zap className="w-5 h-5 opacity-70" />
                 </Link>
               </Button>
-              
-              <Button asChild variant="premium" size="xl" className="group">
+
+              <Button asChild variant="premium" size="xl" className="group w-full sm:w-auto max-w-xs">
                 <Link href="/coach" className="cta-button">
                   <Crown className="w-6 h-6 transition-transform group-hover:scale-110" />
                   <span className="font-semibold whitespace-nowrap">Je suis coach PRO</span>
